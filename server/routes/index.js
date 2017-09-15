@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const authMiddleware = require('./middlewares/auth')
+const authMiddleware = require('./middleware/auth')
 const auth = require('./auth/router')
 const user = require('./user/router')
 
