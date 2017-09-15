@@ -1,20 +1,12 @@
-/* =======================
-    LOAD THE DEPENDENCIES
-==========================*/
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-
-/* =======================
-    LOAD THE CONFIG
-==========================*/
 const config = require('./config')
-const port = process.env.PORT || 3000
 
-/* =======================
-    EXPRESS CONFIGURATION
-==========================*/
+// // // //
+
+// Express.js App & Configuration
 const app = express()
 
 // parse JSON and url-encoded query
@@ -28,7 +20,7 @@ app.use(morgan('dev'))
 app.set('jwt-secret', config.secret)
 
 // index page, just for testing
-// TODO - remove
+// TODO - REMOVE
 app.get('/', (req, res) => {
     res.send('Hello JWT')
 })
@@ -38,26 +30,5 @@ app.use('/api', require('./routes/api'))
 
 // // // //
 
-// TODO - integrate
 // Exports Express app
-// module.exports = app;
-
-// // // //
-
-// TODO - abstract this and the MongoDB connection logic elsewhere
-// open the server
-app.listen(port, () => {
-    console.log(`Express is running on port ${port}`)
-})
-
-/* =======================
-    CONNECT TO MONGODB SERVER
-==========================*/
-mongoose.connect(config.mongodbUri)
-mongoose.Promise = global.Promise
-const db = mongoose.connection
-db.on('error', console.error)
-db.once('open', ()=>{
-    console.log('connected to mongodb server')
-});
-
+module.exports = app;
