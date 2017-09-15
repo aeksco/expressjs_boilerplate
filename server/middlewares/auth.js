@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken')
 
+// // // //
+
 const authMiddleware = (req, res, next) => {
-    // read the token from header or url 
+
+    // read the token from header or url
     const token = req.headers['x-access-token'] || req.query.token
 
     // token does not exist
@@ -36,5 +39,7 @@ const authMiddleware = (req, res, next) => {
         next()
     }).catch(onError)
 }
+
+// // // //
 
 module.exports = authMiddleware

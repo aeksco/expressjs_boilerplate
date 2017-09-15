@@ -3,10 +3,15 @@ const Schema = mongoose.Schema
 const crypto = require('crypto')
 const config = require('../config')
 
+// // // //
+
 const User = new Schema({
     username: String,
     password: String,
-    admin: { type: Boolean, default: false }
+    admin: {
+      type: Boolean,
+      default: false
+    }
 })
 
 
@@ -51,5 +56,7 @@ User.methods.assignAdmin = function() {
     this.admin = true
     return this.save()
 }
+
+// // // //
 
 module.exports = mongoose.model('User', User)
