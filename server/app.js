@@ -42,14 +42,13 @@ app.use('/api', require('./routes/api'))
 // Exports Express app
 // module.exports = app;
 
+// // // //
 
 // TODO - abstract this and the MongoDB connection logic elsewhere
 // open the server
 app.listen(port, () => {
     console.log(`Express is running on port ${port}`)
 })
-
-
 
 /* =======================
     CONNECT TO MONGODB SERVER
