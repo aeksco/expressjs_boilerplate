@@ -1,14 +1,10 @@
 const jwt = require('jsonwebtoken')
-const User = require('../../../models/user')
+const User = require('../../models/user')
 
-/*
-    POST /api/auth/register
-    {
-        username,
-        password
-    }
-*/
+// // // //
 
+// POST /api/auth/register
+// { username, password }
 exports.register = (req, res) => {
     const { username, password } = req.body
     let newUser = null
@@ -62,14 +58,10 @@ exports.register = (req, res) => {
     .catch(onError)
 }
 
-/*
-    POST /api/auth/login
-    {
-        username,
-        password
-    }
-*/
+// // // //
 
+// POST /api/auth/login
+// { username, password }
 exports.login = (req, res) => {
     const {username, password} = req.body
     const secret = req.app.get('jwt-secret')
@@ -89,15 +81,15 @@ exports.login = (req, res) => {
                             _id: user._id,
                             username: user.username,
                             admin: user.admin
-                        }, 
-                        secret, 
+                        },
+                        secret,
                         {
                             expiresIn: '7d',
                             issuer: 'velopert.com',
                             subject: 'userInfo'
                         }, (err, token) => {
                             if (err) reject(err)
-                            resolve(token) 
+                            resolve(token)
                         })
                 })
                 return p
@@ -107,7 +99,7 @@ exports.login = (req, res) => {
         }
     }
 
-    // respond the token 
+    // respond the token
     const respond = (token) => {
         res.json({
             message: 'logged in successfully',
@@ -130,10 +122,9 @@ exports.login = (req, res) => {
 
 }
 
-/*
-    GET /api/auth/check
-*/
+// // // //
 
+// GET /api/auth/check
 exports.check = (req, res) => {
     res.json({
         success: true,
