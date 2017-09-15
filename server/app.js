@@ -10,7 +10,7 @@ const mongoose = require('mongoose')
     LOAD THE CONFIG
 ==========================*/
 const config = require('./config')
-const port = process.env.PORT || 3000 
+const port = process.env.PORT || 3000
 
 /* =======================
     EXPRESS CONFIGURATION
@@ -28,6 +28,7 @@ app.use(morgan('dev'))
 app.set('jwt-secret', config.secret)
 
 // index page, just for testing
+// TODO - remove
 app.get('/', (req, res) => {
     res.send('Hello JWT')
 })
@@ -35,6 +36,14 @@ app.get('/', (req, res) => {
 // configure api router
 app.use('/api', require('./routes/api'))
 
+// // // //
+
+// TODO - integrate
+// Exports Express app
+// module.exports = app;
+
+
+// TODO - abstract this and the MongoDB connection logic elsewhere
 // open the server
 app.listen(port, () => {
     console.log(`Express is running on port ${port}`)
@@ -51,4 +60,5 @@ const db = mongoose.connection
 db.on('error', console.error)
 db.once('open', ()=>{
     console.log('connected to mongodb server')
-})
+});
+
