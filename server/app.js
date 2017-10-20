@@ -22,10 +22,11 @@ app.set('jwt-secret', config.secret)
 // index page, just for testing
 // TODO - REMOVE
 app.get('/', (req, res) => {
-    res.send('Hello JWT')
+  res.send('Hello JWT')
 })
 
-// configure api router
+// Boostrap API routes
+// Scopes to /api
 app.use('/api', require('./routes'))
 
 // // // //
