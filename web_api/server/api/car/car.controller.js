@@ -1,16 +1,11 @@
 
-// TODO - abstract connection logic into separate file
+// TODO - abstract connection logic into separate file?
 const esodm = require('elasticsearch-odm-5');
 const Car = require('./car.model');
 
 // // // //
 
-
-
-// // // //
-
 // GET /cars
-// TODO - pagination (middleware?)
 module.exports.list = (req, res, next) => {
 
     let queryOptions = {
@@ -20,7 +15,7 @@ module.exports.list = (req, res, next) => {
 
     let query = {};
 
-    esodm.connect('cars').then(function(){
+    esodm.connect('cars').then(() => {
       Car.find(query, queryOptions).then((documents) => {
         res.send(documents).end();
       });
@@ -51,8 +46,8 @@ module.exports.create = (req, res, next) => {
 module.exports.show = (req, res, next) => {
 
     // TODO - abstract into /bin/www.js
-    return esodm.connect('cars').then( () => {
-        Car.findById(req.params.id).then( (response) => {
+    return esodm.connect('cars').then(() => {
+        Car.findById(req.params.id).then((response) => {
             return res.status(200).send(response).end();
         });
     });
@@ -64,9 +59,9 @@ module.exports.show = (req, res, next) => {
 module.exports.update = (req, res, next) => {
 
     // TODO - abstract into /bin/www.js
-    return esodm.connect('cars').then( () => {
-        Car.findById(req.params.id).then( (doc) => {
-            doc.update(req.body).then( (response) => {
+    return esodm.connect('cars').then(() => {
+        Car.findById(req.params.id).then((doc) => {
+            doc.update(req.body).then((response) => {
                 return res.status(200).send(response).end();
             });
         });
@@ -78,8 +73,8 @@ module.exports.update = (req, res, next) => {
 // DELETE /cars/:id
 module.exports.delete = (req, res, next) => {
     // TODO - abstract into /bin/www.js
-    return esodm.connect('cars').then( () => {
-        Car.remove(req.params.id).then( (response) => {
+    return esodm.connect('cars').then(() => {
+        Car.remove(req.params.id).then((response) => {
             return res.status(200).send(response).end();
         });
     });

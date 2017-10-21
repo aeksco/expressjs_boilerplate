@@ -4,7 +4,7 @@ const esodm = require('elasticsearch-odm-5');
 
 const CarSchema = new esodm.Schema({
   type: String,
-  color: {type: String, required: true}
+  color: { type: String, required: true }
 });
 
 // // // //
