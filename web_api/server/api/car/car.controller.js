@@ -38,9 +38,11 @@ module.exports.create = (req, res, next) => {
 
 // GET /cars/:id
 module.exports.show = (req, res, next) => {
-    // return Widget.findById(req.params.id).then(function(response) {
-    //     return res.status(200).send(response).end();
-    // }).catch(next);
+    return esodm.connect('eb_test_index').then( () => {
+        Car.findById(req.params.id).then( (response) => {
+            return res.status(200).send(response).end();
+        });
+    });
 };
 
 // // // //
