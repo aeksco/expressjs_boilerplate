@@ -6,6 +6,8 @@ const User = require('../user/user.model')
 // POST /api/auth/register
 // { username, password }
 exports.register = (req, res) => {
+
+    // Parses username, password parameters from req.body
     const { username, password } = req.body
     let newUser = null
 
