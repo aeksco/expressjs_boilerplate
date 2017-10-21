@@ -20,8 +20,8 @@ const buildQuery = (opts) => {
     if (opts.paginate) {
 
         // Default pagination options
-        let page = opts.page || 0;
-        let per_page = opts.per_page || 10;
+        let page = Number(opts.page) || 0;
+        let per_page = Number(opts.per_page) || 10;
         let skip = per_page * page;
 
         // Applies pagination options to query
@@ -53,9 +53,10 @@ module.exports.list = (req, res, next) => {
 
     // Build paginated query
     let payload = buildQuery({
-        schema: Widget,
-        paginate: true,
-        page: req.query.page
+        schema:     Widget,
+        paginate:   true,
+        page:       req.query.page,
+        per_page:   req.query.per_page
     });
 
     // Returns paginated query
