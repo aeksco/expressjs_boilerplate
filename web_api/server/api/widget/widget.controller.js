@@ -2,11 +2,69 @@ const Widget = require('./widget.model')
 
 // // // //
 
+// Query / Sort / Paginate
+const buildQuery = (opts) => {
+
+    // Defines return payload object
+    let payload = {};
+
+    // Defines Mongoose query
+    query = opts.schema.find(opts.query || {});
+
+    // Sort
+    if (opts.sort) {
+        query.sort(opts.sort);
+    }
+
+    // Pagination
+    if (opts.paginate) {
+
+        // Default pagination options
+        let page = opts.page || 0;
+        let per_page = opts.per_page || 10;
+        let skip = per_page * page;
+
+        // Applies pagination options to query
+        query.limit(per_page);
+        query.skip(skip);
+
+        // Assigns pagination parameters to payload
+        payload.page = page;
+        payload.per_page = per_page;
+
+    }
+
+    // Assigns query to payload
+    payload.query = query;
+
+    // Returns payload
+    return payload;
+
+}
+
+// // // //
+
 // GET /widgets
 // TODO - pagination (middleware?)
 module.exports.list = (req, res, next) => {
-    return Widget.find({}).then(function(response) {
-        return res.status(200).send(response).end();
+    // return Widget.find({}).then(function(response) {
+    //     return res.status(200).send(response).end();
+    // }).catch(next);
+
+    // Build paginated query
+    let payload = buildQuery({
+        schema: Widget,
+        paginate: true,
+        page: req.query.page
+    });
+
+    // Returns paginated query
+    return payload.query.lean().exec().then( (response) => {
+        return res.status(200).send({
+            page:       payload.page,
+            per_page:   payload.per_page,
+            items:      response })
+        .end();
     }).catch(next);
 };
 
