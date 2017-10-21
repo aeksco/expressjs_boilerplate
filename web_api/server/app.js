@@ -7,27 +7,27 @@ const config = require('./config')
 // // // //
 
 // Express.js App & Configuration
-const app = express()
+const app = express();
 
 // parse JSON and url-encoded query
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // print the request log on console
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 // set the secret key variable for jwt
-app.set('jwt-secret', config.secret)
+// TODO - should this be abstracted elsewhere?
+app.set('jwt-secret', config.secret);
 
 // index page, just for testing
 // TODO - REMOVE
 app.get('/', (req, res) => {
-  res.send('Hello JWT')
-})
+  res.send('Hello JWT');
+});
 
-// Boostrap API routes
-// Scopes to /api
-app.use('/api', require('./routes'))
+// Boostrap API routes - scopes all routes under /api
+app.use('/api', require('./routes'));
 
 // // // //
 
