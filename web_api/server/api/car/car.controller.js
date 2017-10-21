@@ -38,6 +38,8 @@ module.exports.create = (req, res, next) => {
 
 // GET /cars/:id
 module.exports.show = (req, res, next) => {
+
+    // TODO - abstract into /bin/www.js
     return esodm.connect('eb_test_index').then( () => {
         Car.findById(req.params.id).then( (response) => {
             return res.status(200).send(response).end();
@@ -49,16 +51,25 @@ module.exports.show = (req, res, next) => {
 
 // PUT /cars/:id
 module.exports.update = (req, res, next) => {
-    // return Widget.findByIdAndUpdate(req.params.id, {$set: req.body}, { new: true }).then(function(response) {
-    //     return res.status(200).send(response).end();
-    // }).catch(next);
+
+    // TODO - abstract into /bin/www.js
+    return esodm.connect('eb_test_index').then( () => {
+        Car.findById(req.params.id).then( (doc) => {
+            doc.update(req.body).then( (response) => {
+                return res.status(200).send(response).end();
+            });
+        });
+    });
 };
 
 // // // //
 
 // DELETE /cars/:id
 module.exports.delete = (req, res, next) => {
-    // return Widget.remove({_id: req.params.id }).then(function(response) {
-    //     return res.status(200).send(response).end();
-    // }).catch(next);
+    // TODO - abstract into /bin/www.js
+    return esodm.connect('eb_test_index').then( () => {
+        Car.remove(req.params.id).then( (response) => {
+            return res.status(200).send(response).end();
+        });
+    });
 };
