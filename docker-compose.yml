@@ -13,6 +13,7 @@ services:
       options:
         syslog-address: "tcp://localhost:5000"
         syslog-facility: "daemon"
+        tag: "mongo"
 
   mongo_admin:
     image: mongo-express
@@ -27,6 +28,7 @@ services:
       options:
         syslog-address: "tcp://localhost:5000"
         syslog-facility: "daemon"
+        tag: "mongo-admin"
 
   redis:
     image: redis
@@ -39,6 +41,7 @@ services:
       options:
         syslog-address: "tcp://localhost:5000"
         syslog-facility: "daemon"
+        tag: "redis"
 
   nginx:
     image: nginx
@@ -53,6 +56,7 @@ services:
       options:
         syslog-address: "tcp://localhost:5000"
         syslog-facility: "daemon"
+        tag: "nginx"
 
   cerebro:
     image: yannart/cerebro
@@ -68,6 +72,7 @@ services:
       options:
         syslog-address: "tcp://localhost:5000"
         syslog-facility: "daemon"
+        tag: "cerebro"
 
   elasticsearch:
     build: elasticsearch/
@@ -93,7 +98,7 @@ services:
     networks:
       - elk
     depends_on:
-      - eb_elasticsearch
+      - elasticsearch
 
   kibana:
     build: kibana/
@@ -105,6 +110,13 @@ services:
       - elk
     depends_on:
       - elasticsearch
+      - logstash
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "tcp://localhost:5000"
+        syslog-facility: "daemon"
+        tag: "kibana"
 
 networks:
   elk:
