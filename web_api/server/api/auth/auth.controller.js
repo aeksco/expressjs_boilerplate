@@ -123,13 +123,3 @@ exports.login = (req, res) => {
     .catch(onError)
 
 }
-
-// // // //
-
-// GET /api/auth/check
-exports.check = (req, res) => {
-    res.json({
-        success: true,
-        info: req.decoded
-    })
-}
