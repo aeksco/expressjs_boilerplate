@@ -15,6 +15,16 @@ services:
         syslog-facility: "daemon"
         tag: "mongo"
 
+  auth:
+    image: beevelop/nginx-basic-auth
+    ports:
+      - "8080:80"
+    links:
+      - mongo_admin:web
+    environment:
+      FORWARD_PORT: 8081
+      # HTPASSWD: 'foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' # TODO - password here isn't working (only foo:bar default is active)
+
   mongo_admin:
     image: mongo-express
     links:
