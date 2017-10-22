@@ -1,8 +1,8 @@
-const User = require('../../models/user')
+const User = require('./user.model')
 
 // // // //
 
-// GET /api/user/list
+// GET /users
 exports.list = (req, res) => {
     // refuse if not an admin
     if(!req.decoded.admin) {
@@ -22,7 +22,7 @@ exports.list = (req, res) => {
 
 // // // //
 
-// POST /api/user/assign-admin/:username
+// POST /users/assign-admin/:username
 exports.assignAdmin = (req, res) => {
     // refuse if not an admin
     if(!req.decoded.admin) {

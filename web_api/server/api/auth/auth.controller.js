@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken')
-const User = require('../../models/user')
+const User = require('../user/user.model')
 
 // // // //
 
 // POST /api/auth/register
 // { username, password }
 exports.register = (req, res) => {
+
+    // Parses username, password parameters from req.body
     const { username, password } = req.body
     let newUser = null
 
@@ -120,14 +122,4 @@ exports.login = (req, res) => {
     .then(respond)
     .catch(onError)
 
-}
-
-// // // //
-
-// GET /api/auth/check
-exports.check = (req, res) => {
-    res.json({
-        success: true,
-        info: req.decoded
-    })
 }

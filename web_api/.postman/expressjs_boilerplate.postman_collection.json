@@ -1,0 +1,74 @@
+{
+	"variables": [],
+	"info": {
+		"name": "expressjs_boilerplate",
+		"_postman_id": "a7425849-0679-69d2-7def-bc0559eb593d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/users",
+			"request": {
+				"url": "/api/users",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "List all Users in the database."
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/login",
+			"request": {
+				"url": "/api/auth/login",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Authenticates and end user."
+			},
+			"response": []
+		},
+		{
+			"name": "/api/auth/register",
+			"request": {
+				"url": "/api/auth/register",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": "Registers a new user."
+			},
+			"response": []
+		}
+	]
+}
