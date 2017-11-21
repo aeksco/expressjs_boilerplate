@@ -15,15 +15,15 @@ services:
         syslog-facility: "daemon"
         tag: "mongo"
 
-  auth:
-    image: beevelop/nginx-basic-auth
-    ports:
-      - "8080:80"
-    links:
-      - mongo_admin:web
-    environment:
-      FORWARD_PORT: 8081
-      # HTPASSWD: 'foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' # TODO - password here isn't working (only foo:bar default is active)
+  # auth:
+  #   image: beevelop/nginx-basic-auth
+  #   ports:
+  #     - "8080:80"
+  #   links:
+  #     - mongo_admin:web
+  #   environment:
+  #     FORWARD_PORT: 8081
+  #     # HTPASSWD: 'foo:$apr1$odHl5EJN$KbxMfo86Qdve2FH4owePn.' # TODO - password here isn't working (only foo:bar default is active)
 
   mongo_admin:
     image: mongo-express
@@ -53,36 +53,36 @@ services:
         syslog-facility: "daemon"
         tag: "redis"
 
-  nginx:
-    image: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - logstash
-    logging:
-      driver: "syslog"
-      options:
-        syslog-address: "tcp://localhost:5000"
-        syslog-facility: "daemon"
-        tag: "nginx"
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #   depends_on:
+  #     - logstash
+  #   logging:
+  #     driver: "syslog"
+  #     options:
+  #       syslog-address: "tcp://localhost:5000"
+  #       syslog-facility: "daemon"
+  #       tag: "nginx"
 
-  cerebro:
-    image: yannart/cerebro
-    ports:
-      - "9000:9000"
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch # NOTE - to use point Cerebro to http://elasticsearch:9200
-      - logstash
-    logging:
-      driver: "syslog"
-      options:
-        syslog-address: "tcp://localhost:5000"
-        syslog-facility: "daemon"
-        tag: "cerebro"
+  # cerebro:
+  #   image: yannart/cerebro
+  #   ports:
+  #     - "9000:9000"
+  #   networks:
+  #     - elk
+  #   depends_on:
+  #     - elasticsearch # NOTE - to use point Cerebro to http://elasticsearch:9200
+  #     - logstash
+  #   logging:
+  #     driver: "syslog"
+  #     options:
+  #       syslog-address: "tcp://localhost:5000"
+  #       syslog-facility: "daemon"
+  #       tag: "cerebro"
 
   elasticsearch:
     build: elasticsearch/
